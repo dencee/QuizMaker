@@ -13,7 +13,7 @@ public class QuizMaker {
 
     /*
      * Input parameter to the constructor is the QuizQuestionDao interface and
-     * NOT ApiQuizQuestionDao, jdbcQuizQuestionDao, or FileQuizQuestionDao.
+     * NOT jdbcQuizQuestionDao or FileQuizQuestionDao.
      *
      * This input variable never has to change its type, leaving this code as a
      * whole unaffected by the kind of object loading the questions
@@ -23,21 +23,17 @@ public class QuizMaker {
     }
 
     public void run() {
-        // Get quizzes
         List<String> quizzes = dao.getQuizzes();
 
-        // Ask user to select a quiz
         String quizName = askQuiz(quizzes);
 
-        // Get quiz questions
         List<QuizQuestion> quiz = dao.getQuestionsForQuiz(quizName);
 
-        // Ask the quiz questions
-        int numberCorrectResponses = deliverQuiz(quiz);
-
-        System.out.println("You got " + numberCorrectResponses + " answer(s) correct out of the "
+        int numberRight = deliverQuiz(quiz);
+        System.out.println("You got " + numberRight + " answer(s) correct out of the "
                 + quiz.size() + " question(s) asked.");
     }
+
 
     private String askQuiz(List<String> quizzes){
         String quizName = null;

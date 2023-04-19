@@ -10,10 +10,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.util.Scanner;
 
 public class QuizMakerCLI {
-    /*
-     * TODO: Make sure to create the QuizMaker database and then
-     *  run the quiz_db.sql file to build the correct tables
-     */
     static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/QuizMaker";
 
     public static void main(String[] args) {
