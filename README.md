@@ -15,5 +15,11 @@ Then open a query window and run the `quiz_db.sql` file from the /database folde
     QuizQuestionDao     - Dao interface that is implemented by ApiQuizQuestionDao, JdbcQuizQuestionDao, and FileQuizQuestionDao  
 
 After starting the program, select where to load the quiz questions from.
-The File and Database sources are already completed, but **the API is not**.
+The File and Database sources are completed, but **the API is not**.
 Afterwards, select a quiz number and the corresponding quiz will be loaded.
+
+## Miscellaneous
+
+The model classes used in this starter code were generated from [jsonschema2pojo.org](https://www.jsonschema2pojo.org/) with the following settings:
+
+![trivia api schema](./images/json-trivia-schema.png)
