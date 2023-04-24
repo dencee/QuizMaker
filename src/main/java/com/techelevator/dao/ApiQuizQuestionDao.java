@@ -3,7 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.QuizQuestion;
 import com.techelevator.model.TriviaApi;
 import com.techelevator.model.TriviaApiResult;
-import com.techelevator.services.RestTriviaApi;
+import com.techelevator.services.RestTriviaService;
 import org.jsoup.Jsoup;
 
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ public class ApiQuizQuestionDao implements QuizQuestionDao {
 
     @Override
     public List<String> getQuizzes() {
-        return new RestTriviaApi().getCategoryNames();
+        return new RestTriviaService().getCategoryNames();
     }
 
     @Override
     public List<QuizQuestion> getQuestionsForQuiz(String quizName) {
 
-        RestTriviaApi api = new RestTriviaApi(quizName);
+        RestTriviaService api = new RestTriviaService(quizName);
         return mapTriviaApiToQuizQuestions(api.getTrivia());
     }
 
