@@ -5,11 +5,13 @@ import com.techelevator.model.TriviaApi;
 import com.techelevator.model.TriviaApiResult;
 import com.techelevator.services.RestTriviaService;
 import org.jsoup.Jsoup;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Component
 public class ApiQuizQuestionDao implements QuizQuestionDao {
 
     @Override
@@ -18,9 +20,9 @@ public class ApiQuizQuestionDao implements QuizQuestionDao {
     }
 
     @Override
-    public List<QuizQuestion> getQuestionsForQuiz(String quizName) {
+    public List<QuizQuestion> getQuestionsForQuiz(String quizName, int numQuestions) {
 
-        RestTriviaService api = new RestTriviaService(quizName);
+        RestTriviaService api = new RestTriviaService(quizName, numQuestions);
         return mapTriviaApiToQuizQuestions(api.getTrivia());
     }
 

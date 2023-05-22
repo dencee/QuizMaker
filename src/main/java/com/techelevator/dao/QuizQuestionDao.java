@@ -8,6 +8,6 @@ public interface QuizQuestionDao {
 
     List<String> getQuizzes();
 
-    List<QuizQuestion> getQuestionsForQuiz(String quizName);
+    List<QuizQuestion> getQuestionsForQuiz(String quizName, int numQuestions);
 
 }

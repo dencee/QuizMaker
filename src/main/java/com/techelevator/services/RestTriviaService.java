@@ -3,6 +3,7 @@ package com.techelevator.services;
 import com.techelevator.model.TriviaApi;
 import com.techelevator.services.model.TriviaCategories;
 import com.techelevator.services.model.TriviaCategory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +13,7 @@ import java.util.*;
 /*
  * Category #s here: https://opentdb.com/api_config.php
  */
-public class RestTriviaService {
+public class RestTriviaService implements TriviaService {
     private static final int NUMBER_OF_QUESTIONS = 10;
     private static final String API_URL = "https://opentdb.com/api.php";
     private static final String CATEGORY_URL = "https://opentdb.com/api_category.php";
@@ -27,11 +28,11 @@ public class RestTriviaService {
         this.categories = this.getCategories();
     }
 
-    public RestTriviaService(String category){
+    public RestTriviaService(String category, Integer numberOfQuestions){
         this();
         this.difficulty = "medium";
         this.type = "multiple";
-        this.numberOfQuestions = NUMBER_OF_QUESTIONS;
+        this.numberOfQuestions = numberOfQuestions == null ? NUMBER_OF_QUESTIONS : numberOfQuestions;
         this.category = getCategoryIdByName(category);
 
         if (this.category == null) {
@@ -44,7 +45,6 @@ public class RestTriviaService {
          * Example:
          * "https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple"
          */
-        // TODO: Finish
         final String url = API_URL + "?amount=" + this.numberOfQuestions + "&category=" + this.category +
                 "&difficulty=" + this.difficulty + "&type=" + this.type;
 
@@ -81,8 +81,28 @@ public class RestTriviaService {
     }
 
     private Integer getCategoryIdByName(String category){
+        Integer categoryId = findCategoryIdByExactName(category);
+
+        if(categoryId == null){
+            categoryId = findCategoryIdByPartialName(category);
+        }
+
+        return categoryId;
+    }
+
+    private Integer findCategoryIdByExactName(String category){
         for(TriviaCategory eachCategory : this.categories.getCategories()){
             if(eachCategory.getName().equalsIgnoreCase(category)){
+                return eachCategory.getId();
+            }
+        }
+
+        return null;
+    }
+
+    private Integer findCategoryIdByPartialName(String category){
+        for(TriviaCategory eachCategory : this.categories.getCategories()){
+            if(eachCategory.getName().toLowerCase().indexOf(category.toLowerCase()) >= 0){
                 return eachCategory.getId();
             }
         }

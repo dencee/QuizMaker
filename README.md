@@ -1,4 +1,7 @@
 # QuizMaker with DAO
+
+API documentation at: http://localhost:8080/swagger-ui/
+
 This version of QuizMaker includes 3 DAO implementations:
  * one for reading from text files
  * one for reading from a database.

@@ -17,7 +17,7 @@ public class FileQuizQuestionDao implements QuizQuestionDao {
     }
 
     @Override
-    public List<QuizQuestion> getQuestionsForQuiz(String quizName) {
+    public List<QuizQuestion> getQuestionsForQuiz(String quizName, int numQuestions) {
         List<QuizQuestion> questions = new ArrayList<>();
 
         File quizFile = new File(quizName);

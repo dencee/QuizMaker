@@ -1,9 +1,14 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class QuizQuestion {
 
+    @JsonProperty
 	private String question;
+    @JsonProperty
 	private String[] answers;
+    @JsonProperty
 	private int correctAnswer;
 
     public void setQuestion(String question) {

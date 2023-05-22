@@ -32,13 +32,15 @@ public class JdbcQuizQuestionDao implements QuizQuestionDao {
     }
 
     @Override
-    public List<QuizQuestion> getQuestionsForQuiz(String quizName) {
+    public List<QuizQuestion> getQuestionsForQuiz(String quizName, int numQuestions) {
         String sql = "SELECT question.question_id, question_text, correct_answer\n" +
                 "FROM question\n" +
                 "JOIN quiz_question qq ON qq.question_id = question.question_id\n" +
                 "JOIN quiz ON quiz.quiz_id = qq.quiz_id\n" +
                 "WHERE quiz_name = ?\n" +
                 "ORDER BY question_number;";
+
+        // TODO: implement numQuestions
 
         SqlRowSet questionRows = jdbcTemplate.queryForRowSet(sql, quizName);
         List<QuizQuestion> results = new ArrayList<>();

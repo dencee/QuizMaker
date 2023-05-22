@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class QuizMaker {
 
+    private final int DEFAULT_QUIZ_QUESTIONS = 10;
+
     private QuizQuestionDao dao;
     private final Scanner userInput = new Scanner(System.in);
 
@@ -27,7 +29,7 @@ public class QuizMaker {
 
         String quizName = askQuiz(quizzes);
 
-        List<QuizQuestion> quiz = dao.getQuestionsForQuiz(quizName);
+        List<QuizQuestion> quiz = dao.getQuestionsForQuiz(quizName, DEFAULT_QUIZ_QUESTIONS);
 
         int numberRight = deliverQuiz(quiz);
         System.out.println("You got " + numberRight + " answer(s) correct out of the "
